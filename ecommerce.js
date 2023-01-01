@@ -111,8 +111,7 @@ function removeFromCart() {
     } else {
         console.log("Name of the item you wish to remove");
         let input = generalInput()
-        let new_cart = cart.filter(item => item !== input)
-        console.log(new_cart);
+        
     }
 }
 
@@ -124,14 +123,12 @@ function payment() {
         option()
     
     } else {
-        console.log("Here we go");
-        console.log(cart);
         for(var i = 0; i < cart.length; i++){
             var [items] = Object.entries(cart[i])
             cost += items[1];
             prod.push(items[0])
         }
-        console.log("You but the following items...");
+        console.log("You bought the following items...");
         prod.forEach(element => {
             console.log(element);
         });
@@ -149,10 +146,9 @@ function displayCartItems() {
     }
     for (var i = 0; i < cart.length; i++){
         let [item] = Object.entries(cart[i]);
-        console.log(item);
         console.log(item[0]);
-        option()
     }
+    option()
 }
 
 
