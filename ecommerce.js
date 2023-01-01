@@ -15,7 +15,7 @@ function generalInput() {
 }
 
 function option() {
-    console.log("Press \n 1: For clothing line \n 2: For electronics \n 3: To buy every product in the cart \n Any key to exit");
+    console.log("Press \n 1: For clothing line \n 2: For electronics \n 3: To buy every product in the cart \n Press 4 to remove item \n Press 5 to display cart items Any key to exit");
     let input = generalInput();
     switch (input) {
         case 1:
@@ -27,7 +27,13 @@ function option() {
         case 3:
             payment();
             break;
-    
+        case 4:
+            removeFromCart()
+            break;
+        case 5:
+            console.log("Items in your cart are: ");
+            displayCartItems();
+            break;
         default:
             exit();
     }
@@ -40,14 +46,16 @@ function clothing() {
     }
     let input = generalInput();
     if (input == 0 || input == 1 || input == 2 || input == 3){
-        console.log(`You're interested in ${clothingItems[input][0]} \n Press 1 to buy \n Press 2 to add to cart \n Press any key to go back`);
+        console.log(`You're interested in ${clothingItems[input][0]} \n Press 1 to buy \n Press 2 to add to cart \n Press 3 to buy all items in the cart \n Press any key to go back`);
         var input2 = generalInput();
         if (input2 == 1){
             buyProduct(clothingItems[input])
         } else if (input2 ==2){
             addToCart(clothingItems[input])
+        } else if (input2 == 3){
+            payment();
         } else {
-            clothing()
+            clothing();
         }
     } else {
         exit();
@@ -55,20 +63,22 @@ function clothing() {
 }
 
 function electronics() {
-    for(var i = 0; i < electronics.length; i++){
+    for(var i = 0; i < electronicsItems.length; i++){
         var [electro] = Object.entries(electronicsItems[i])
         console.log(`${electro[0]} --> $${electro[1]} \n Press ${i} to add to cart or to buy \n Press any key to exit`);
     }
     let input = generalInput();
     if (input == 0 || input == 1 || input == 2 || input == 3){
-        console.log(`You're interested in ${electronicsItems[input][0]} \n Press 1 to buy \n Press 2 to add to cart \n Press any key to go back`);
+        console.log(`You're interested in ${electronicsItems[input][0]} \n Press 1 to buy \n Press 2 to add to cart \n Press 3 to buy all items in the cart \n Press any key to go back`);
         var input2 = generalInput();
         if (input2 == 1){
             buyProduct(electronicsItems[input])
         } else if (input2 ==2){
             addToCart(electronicsItems[input])
+        } else if (input2 == 3){
+            payment();
         } else {
-            clothing()
+            electronics()
         }
     } else {
         exit();
@@ -94,8 +104,16 @@ function buyProduct(product) {
         }
 }
 
-function removeFromCart(params) {
-    
+function removeFromCart() {
+    if (cart.length <= 0){
+        console.log("Cart is empty");
+        option()
+    } else {
+        console.log("Name of the item you wish to remove");
+        let input = generalInput()
+        let new_cart = cart.filter(item => item !== input)
+        console.log(new_cart);
+    }
 }
 
 function payment() {
@@ -105,10 +123,10 @@ function payment() {
         console.log("No item in the cart");
         option()
     
-    } else if (cart.length == 1){
-        buyProduct();
     } else {
-        for(var i = 0; i < clothingItems.length; i++){
+        console.log("Here we go");
+        console.log(cart);
+        for(var i = 0; i < cart.length; i++){
             var [items] = Object.entries(cart[i])
             cost += items[1];
             prod.push(items[0])
@@ -118,11 +136,25 @@ function payment() {
             console.log(element);
         });
         console.log(`Total cost $${cost}`);
+        cart = []
         option();
     }
     
 }
 
+function displayCartItems() {
+    if (cart.length <= 0){
+        console.log("Cart is empty");
+        option();
+    }
+    for (var i = 0; i < cart.length; i++){
+        let [item] = Object.entries(cart[i]);
+        console.log(item);
+        console.log(item[0]);
+        option()
+    }
+}
 
 
-clothing()
+
+option()
