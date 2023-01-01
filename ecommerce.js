@@ -15,7 +15,7 @@ function generalInput() {
 }
 
 function option() {
-    console.log("Press \n 1: For clothing line \n 2: For electronics \n 3: To buy every product in the cart \n Press 4 to remove item \n Press 5 to display cart items Any key to exit");
+    console.log("Press \n 1: For clothing line \n 2: For electronics \n 3: To buy every product in the cart \n Press 5 to display cart items \n Press Any key to exit");
     let input = generalInput();
     switch (input) {
         case 1:
@@ -46,7 +46,8 @@ function clothing() {
     }
     let input = generalInput();
     if (input == 0 || input == 1 || input == 2 || input == 3){
-        console.log(`You're interested in ${clothingItems[input][0]} \n Press 1 to buy \n Press 2 to add to cart \n Press 3 to buy all items in the cart \n Press any key to go back`);
+        var [cloths] = Object.entries(clothingItems[input])
+        console.log(`You're interested in ${cloths[0]} \n Press 1 to buy \n Press 2 to add to cart \n Press 3 to buy all items in the cart \n Press any key to go back`);
         var input2 = generalInput();
         if (input2 == 1){
             buyProduct(clothingItems[input])
@@ -69,7 +70,8 @@ function electronics() {
     }
     let input = generalInput();
     if (input == 0 || input == 1 || input == 2 || input == 3){
-        console.log(`You're interested in ${electronicsItems[input][0]} \n Press 1 to buy \n Press 2 to add to cart \n Press 3 to buy all items in the cart \n Press any key to go back`);
+        var [electro] = Object.entries(electronicsItems[input])
+        console.log(`You're interested in ${electro[0]} \n Press 1 to buy \n Press 2 to add to cart \n Press 3 to buy all items in the cart \n Press any key to go back`);
         var input2 = generalInput();
         if (input2 == 1){
             buyProduct(electronicsItems[input])
@@ -104,16 +106,24 @@ function buyProduct(product) {
         }
 }
 
-function removeFromCart() {
-    if (cart.length <= 0){
-        console.log("Cart is empty");
-        option()
-    } else {
-        console.log("Name of the item you wish to remove");
-        let input = generalInput()
-        
-    }
-}
+// function removeFromCart() {
+//     if (cart.length <= 0){
+//         console.log("Cart is empty");
+//         option()
+//     } else {
+//         console.log("Name of the item you wish to remove");
+//         let itemToRemove = generalInput()
+//         for(var i = 0; i <= cart.length; i++){
+//             let [individulItem] = Object.entries(cart[i] || {});
+//             let ite = individulItem;
+//             if(ite[0] == itemToRemove){
+//                 cart.splice(i);
+//                 option();
+//             }
+//         }
+//         console.log(`${itemToRemove} is not in the cart`);
+//     }
+// }
 
 function payment() {
     prod = []
@@ -149,6 +159,10 @@ function displayCartItems() {
         console.log(item[0]);
     }
     option()
+}
+
+function exit(){
+    console.log("Thanks, we hope to see you next time");
 }
 
 
