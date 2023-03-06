@@ -114,9 +114,8 @@ function buyProduct(product) {
 //         console.log("Name of the item you wish to remove");
 //         let itemToRemove = generalInput()
 //         for(var i = 0; i <= cart.length; i++){
-//             let [individulItem] = Object.entries(cart[i] || {});
-//             let ite = individulItem;
-//             if(ite[0] == itemToRemove){
+//             var [individulItem] = Object.entries(cart[i] || {});
+//             if(individulItem[0] == itemToRemove){
 //                 cart.splice(i);
 //                 option();
 //             }
